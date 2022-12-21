@@ -4,3 +4,4 @@ project(ntut-coding-concepts-exception)
 
 add_subdirectory(p01-without-exception)
 add_subdirectory(p02-use-exception)
+add_subdirectory(p03-custom-exception)
