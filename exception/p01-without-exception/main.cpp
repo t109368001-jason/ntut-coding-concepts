@@ -42,10 +42,8 @@ int main() {
 }
 
 ExitCode f1(Data& data) {
-  ExitCode exitCode = OK;
-  if ((exitCode = f2(data)) != OK) {
-    return exitCode;
-  } else if ((exitCode = f3(data)) != OK) {
+  ExitCode exitCode;
+  if (((exitCode = f2(data)) != OK) || ((exitCode = f3(data)) != OK)) {
     return exitCode;
   }
   if (true) {

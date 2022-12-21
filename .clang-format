@@ -46,9 +46,9 @@ AlignConsecutiveDeclarations: Consecutive
 AlignConsecutiveAssignments: Consecutive
 AlignOperands: true
 AlignTrailingComments: true
-AllowShortBlocksOnASingleLine: Always
+AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: true
-AllowShortFunctionsOnASingleLine: All
+AllowShortFunctionsOnASingleLine: None
 AllowAllConstructorInitializersOnNextLine: true
 #PackConstructorInitializers: PCIS_NextLine 
 BreakConstructorInitializers: AfterColon
