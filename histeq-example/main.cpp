@@ -31,15 +31,24 @@ int main() {
   ntut::histeq(histEq2, histEq3);
   cv::equalizeHist(cvHistEq2, cvHistEq3);
 
-  cv::Mat i1, i2, i3;
-  cv::hconcat(histEq1, cvHistEq1, i1);
-  cv::hconcat(histEq2, cvHistEq2, i2);
-  cv::hconcat(histEq3, cvHistEq3, i3);
+  cv::Mat histEq1Group, histEq2Group, histEq3Group;
+  cv::hconcat(histEq1, cvHistEq1, histEq1Group);
+  cv::hconcat(histEq2, cvHistEq2, histEq2Group);
+  cv::hconcat(histEq3, cvHistEq3, histEq3Group);
 
   cv::imshow("origin", origin);
-  cv::imshow("cvHistEq1, mse=" + std::to_string(computeMSE(histEq1, cvHistEq1)), i1);
-  cv::imshow("cvHistEq2, mse=" + std::to_string(computeMSE(histEq2, cvHistEq2)), i2);
-  cv::imshow("cvHistEq3, mse=" + std::to_string(computeMSE(histEq3, cvHistEq3)), i3);
+  cv::imshow(std::string("histEq1(impl/opencv)")                              //
+                 + ", mse=" + std::to_string(computeMSE(histEq1, cvHistEq1))  //
+                 + ", mse01=" + std::to_string(computeMSE(origin, histEq1)),
+             histEq1Group);
+  cv::imshow(std::string("histEq2(impl/opencv)")                              //
+                 + ", mse=" + std::to_string(computeMSE(histEq2, cvHistEq2))  //
+                 + ", mse12=" + std::to_string(computeMSE(histEq1, histEq2)),
+             histEq2Group);
+  cv::imshow(std::string("histEq3(impl/opencv)")                              //
+                 + ", mse=" + std::to_string(computeMSE(histEq3, cvHistEq3))  //
+                 + ", mse23=" + std::to_string(computeMSE(histEq2, histEq3)),
+             histEq3Group);
 
   while (cv::waitKey(100) != 'q') {
   }
