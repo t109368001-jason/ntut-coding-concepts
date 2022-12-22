@@ -19,7 +19,7 @@ double computeMSE(const cv::Mat& img1, const cv::Mat& img2) {
 }
 
 int main() {
-  cv::Mat origin = cv::imread("lena_gray.bmp", cv::IMREAD_GRAYSCALE);
+  const cv::Mat origin = cv::imread("lena_gray.bmp", cv::IMREAD_GRAYSCALE);
 
   cv::Mat histEq1, histEq2, histEq3;
   cv::Mat cvHistEq1, cvHistEq2, cvHistEq3;
@@ -35,8 +35,6 @@ int main() {
   cv::hconcat(histEq1, cvHistEq1, i1);
   cv::hconcat(histEq2, cvHistEq2, i2);
   cv::hconcat(histEq3, cvHistEq3, i3);
-
-  cv::Mat diff2 = histEq2 - cvHistEq2;
 
   cv::imshow("origin", origin);
   cv::imshow("cvHistEq1, mse=" + std::to_string(computeMSE(histEq1, cvHistEq1)), i1);
