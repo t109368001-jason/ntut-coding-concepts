@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(p01-without-virtual-class)
+project(p02-use-virtual-class)
 
 file(GLOB_RECURSE INCS include/*.h include/*.hpp)
 file(GLOB_RECURSE SRCS src/*.cpp)
