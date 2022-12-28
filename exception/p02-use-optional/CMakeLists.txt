@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(p04-use-optional)
+project(p02-use-optional)
 
 add_executable(${PROJECT_NAME} main.cpp)
