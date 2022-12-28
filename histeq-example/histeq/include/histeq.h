@@ -1,10 +1,5 @@
 #pragma once
 
-#include <exception>
-#include <limits>
-#include <map>
-#include <vector>
-
 #include <opencv2/core.hpp>
 
 namespace ntut {

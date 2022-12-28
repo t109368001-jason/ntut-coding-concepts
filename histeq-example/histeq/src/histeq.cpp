@@ -1,5 +1,12 @@
 #include <histeq.h>
 
+#include <algorithm>
+#include <exception>
+#include <execution>
+#include <limits>
+#include <map>
+#include <vector>
+
 namespace ntut {
 
 using ValueType = std::remove_pointer_t<decltype(cv::Mat::data)>;
@@ -51,11 +58,28 @@ void histeq(const cv::Mat& input, cv::Mat& output) {
     }
   }
 
-  output = input.clone();
+  output = cv::Mat(input.rows, input.cols, input.type());
 
-  for (auto it = output.begin<ValueType>(); it != output.end<ValueType>(); ++it) {  // NOLINT(modernize-loop-convert)
-    *it = valueMap[*it];
-  }
+  // index version
+  //  for (int i = 0; i < input.total(); i++) {
+  //    output.at<ValueType>(i) = valueMap[input.at<ValueType>(i)];
+  //  }
+
+  // iter version
+  //  auto itIn  = input.begin<ValueType>();
+  //  auto itOut = output.begin<ValueType>();
+  //  for (; itIn != input.end<ValueType>() && itOut != output.end<ValueType>();
+  //       ++itIn, ++itOut) {  // NOLINT(modernize-loop-convert)
+  //    *itOut = valueMap[*itIn];
+  //  }
+
+  // transform version
+  std::transform(input.begin<ValueType>(), input.end<ValueType>(), output.begin<ValueType>(),
+                 [&valueMap](const auto& value) { return valueMap[value]; });
+
+  // parallel transform version (tbb required for linux)
+  //  std::transform(std::execution::par, input.begin<ValueType>(), input.end<ValueType>(), output.begin<ValueType>(),
+  //                 [&valueMap](const auto& value) { return valueMap[value]; });
 }
 
 }  // namespace ntut
