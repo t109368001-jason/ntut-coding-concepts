@@ -1,4 +1,6 @@
+#include <algorithm>
 #include <iostream>
+#include <numeric>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/quality/qualitymse.hpp>
@@ -9,12 +11,14 @@ double computeMSE(const cv::Mat& img1, const cv::Mat& img2) {
   if (img1.total() != img2.total()) {
     throw std::logic_error("computeMSE() size of inputs are not matched");
   }
-  double sse = 0.0;
-  for (auto it1 = img1.begin<uchar>(), it2 = img2.begin<uchar>();  //
-       it1 != img1.end<uchar>() && it2 != img2.end<uchar>();       //
-       ++it1, ++it2) {
-    sse += (*it1 - *it2) * (*it1 - *it2);
-  }
+  //  double sse = 0.0;
+  //  for (auto it1 = img1.begin<uchar>(), it2 = img2.begin<uchar>();  //
+  //       it1 != img1.end<uchar>() && it2 != img2.end<uchar>();       //
+  //       ++it1, ++it2) {
+  //    sse += (*it1 - *it2) * (*it1 - *it2);
+  //  }
+  double sse = std::transform_reduce(img1.begin<uchar>(), img1.end<uchar>(), img2.begin<uchar>(), 0.0, std::plus{},
+                                     [](auto& a, auto& b) { return (a - b) * (a - b); });
   return sse / (double)img1.total();
 }
 
