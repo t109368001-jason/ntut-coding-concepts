@@ -1,9 +1,7 @@
-#include <algorithm>
 #include <iostream>
 #include <numeric>
 
 #include <opencv2/opencv.hpp>
-#include <opencv2/quality/qualitymse.hpp>
 
 #include <histeq.h>
 
