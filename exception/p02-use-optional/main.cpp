@@ -2,7 +2,6 @@
 #include <optional>
 
 enum ExitCode {
-  OK = 0,
   ERROR1,
   ERROR2,
   ERROR3,
